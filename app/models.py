@@ -51,6 +51,8 @@ class User(db.Model, UserMixin):
     #     id = db.Column(db.Integer,primary_key=True)
     #     pic_path = db.Column(db.String())
     #     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    # def __repr__(self):
+    #     return f'User {self.name}'
 
 class Role(db.Model):
     __tablename__ = 'roles'
@@ -68,6 +70,46 @@ class UserRoles(db.Model):
 
 user_manager = UserManager(app, db, User)
    
-   
-    def __repr__(self):
-        return f'User {self.name}'
+
+class Post(db.Model):
+    __tablename__ = 'posts'
+
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String())
+    content = db.Column(db.Text)
+    comments = db.relationship('Comment', backref='post')
+    blog_pic_path = db.Column(db.String())
+    time_created = db.Column(db.DateTime(), default = datetime.utcnow)
+    time_updated = db.Column(db.DateTime(), default = datetime.utcnow, onupdate=datetime.utcnow)
+
+
+    @classmethod
+    def get_posts(cls):
+        posts = Post.query.all()
+        response = []
+        response.append(posts)
+        return response
+
+
+class Comment(db.Model):
+    __tablename__ = 'comments'
+
+    id = db.Column(db.Integer, primary_key=True)
+    comment_content = db.Column(db.Text)
+    time_created = db.Column(db.DateTime(), default = datetime.utcnow)
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    post_id = db.Column(db.Integer,db.ForeignKey('posts.id'))
+    comment_owner = db.relationship('User',backref='comment')
+
+
+    def get_comments(self):
+        return Comment.query.filter_by(post_id = post.id).order_by(Comment.time_created.desc()).all()
+
+
+
+class Subscribe(db.Model):
+    __tablename__ = 'subscribed'
+    
+    id = db.Column(db.Integer,primary_key = True)
+    email = db.Column(db.String())   
+    
