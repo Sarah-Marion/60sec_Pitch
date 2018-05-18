@@ -28,4 +28,11 @@ class EditPostForm(FlaskForm):
     submit = SubmitField("post")
 
 
+class SignUpForm(FlaskForm):
 
+    name = StringField("Name:", validators=[Required()])
+    username = StringField("Username:", validators=[Required()])
+    email = StringField("Email:", validators=[Required(),Email()])
+    password = PasswordField('Password', validators = [Required(),EqualTo('password_confirm',message = 'Passwords must match')])
+    password_confirm = PasswordField('Confirm Password', validators = [Required()])
+    submit  = SubmitField("signup")
