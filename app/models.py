@@ -65,6 +65,8 @@ class UserRoles(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     user__id = db.Column(db.Integer, db.ForeignKey('users.id'))
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
+
+user_manager = UserManager(app, db, User)
    
    
     def __repr__(self):
