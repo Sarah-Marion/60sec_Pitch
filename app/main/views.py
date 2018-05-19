@@ -107,15 +107,15 @@ def edit(post_id):
     form.content.data = post.content
 
     if form.validate_on_submit():
-        Post.query.filter_by(id=post_id).update(dict(title=form.title.data,content=form.content.data))
+        Post.query.filter_by(id = post_id).update(dict(title = form.title.data, content = form.content.data))
 
         db.session.commit()
         flash("Post edited \n Edit Again ?","success")
-        return redirect(url_for('main.edit',post_id=post.id))
+        return redirect(url_for('main.edit',post_id = post.id))
 
-    return render_template('edit_post.html',post=post,form=form)
+    return render_template('edit_post.html',post = post, form = form)
 
-    
+
 
 @main.route('/delete/<post_id>',methods=['GET','POST'])
 @login_required
@@ -143,4 +143,68 @@ def deletecomment(comment_id):
     except:
         flash("Comment not deleted","danger")
         return redirect(url_for('main.index'))
+    return redirect(url_for('main.index'))
+
+
+@main.route('/logout')
+@login_required
+def logout():
+
+    logout_user()
+    return redirect(url_for('main.index'))
+
+
+@main.route('/post=<post_id>/comment/<user> ',methods=['GET','POST'])
+@login_required
+def comment(post_id,user):
+
+    comment = request.form['user-comment']
+    usern = User.query.filter_by(username = user).first()
+    
+    if usern and comment:
+        user_comment = Comment(comment_content = comment)
+        user_comment.user_id=usern.id
+        user_comment.post_id=post_id
+        db.session.add(user_comment)
+        db.session.commit()
+
+    return redirect (url_for('main.index'))
+
+
+
+@main.route('/authorize/<provider>')
+def Oauth_authorize(provider):
+
+    if not current_user.is_anonymous:
+        return redirect(url_for('index'))
+    oauth = OAuthSignIn.get_provider(provider)
+    return oauth.authorize()
+
+
+
+@main.route('/callback/<provider>')
+def oauth_callback(provider):
+
+    if not current_user.is_anonymous:
+        return redirect(url_for('index'))
+    oauth = OAuthSignIn.get_provider(provider)
+    username, email = oauth.callback()
+    if email is None:
+        flash('Authentication failed.','danger')
+        return redirect(url_for('index'))
+    user=User.query.filter_by(email=email).first()
+    
+    if not user:
+        name = username
+        user_name = username
+        if user_name is None or user_name == "":
+            user_name = email.split('@')[0]
+            name = user_name
+
+        user=User(name = name,username = user_name, email=email)
+        user.roles.append(Role(role_name = 'User'))
+        db.session.add(user)
+        db.session.commit()
+
+    login_user(user, remember=True)
     return redirect(url_for('main.index'))
