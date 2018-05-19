@@ -99,6 +99,24 @@ def login():
     return render_template('login.html', login_form = login_form)
 
 
+@main.route('/edit/<post_id>',methods=['GET','POST'])
+@login_required
+def edit(post_id):
+    post = Post.query.filter_by(id = post_id).first()
+    form = EditPostForm()
+    form.content.data = post.content
+
+    if form.validate_on_submit():
+        Post.query.filter_by(id=post_id).update(dict(title=form.title.data,content=form.content.data))
+
+        db.session.commit()
+        flash("Post edited \n Edit Again ?","success")
+        return redirect(url_for('main.edit',post_id=post.id))
+
+    return render_template('edit_post.html',post=post,form=form)
+
+    
+
 @main.route('/delete/<post_id>',methods=['GET','POST'])
 @login_required
 def delete(post_id):
@@ -117,7 +135,7 @@ def delete(post_id):
 @main.route('/deletecomment/<comment_id>',methods=['GET','POST'])
 @login_required
 def deletecomment(comment_id):
-    
+
     try:
         comment = Comment.query.filter(Comment.id == comment_id).delete()
         db.session.commit()
