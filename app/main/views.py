@@ -50,8 +50,51 @@ def subscribe():
         db.session.add(user)
         db.session.commit()
 
-        flash("You have been subscribed successfully","success")
+        flash("You have been subscribed successfully", "success")
     else:
-        flash("No email provided","warning")
+        flash("No email provided", "warning")
 
     return redirect(url_for('main.index'))
+
+
+@main.route('/signup',methods=['GET','POST'])
+def register():
+
+    form = SignupForm()
+    
+    if form.validate_on_submit():
+        user = User(name = form.name.data, email = form.email.data, username = form.username.data,password=form.password.data)
+        user.roles.append(Role(role_name='User'))
+        db.session.add(user)
+        db.session.commit()
+        mail_message("Welcome to tweet some", "email/welcome_user", user.email, user = user)
+
+        return redirect(url_for('main.login'))
+
+    if current_user.is_authenticated:
+        return redirect (url_for('main.index'))
+
+    return render_template('register.html',signupform = form)
+
+
+
+
+@main.route('/login',methods=['GET','POST'])
+def login():
+
+    login_form = LoginForm()
+
+    if login_form.validate_on_submit():
+        user = User.query.filter_by(username=login_form.username.data).first()
+        
+        if user is not None and user.verify_password(login_form.password.data):
+            login_user(user)
+            return redirect(request.args.get('next') or url_for('main.index'))
+
+        flash('Invalid username or Password','danger')
+
+    if current_user.is_authenticated:
+        return redirect (url_for('main.index'))
+
+    return render_template('login.html', login_form = login_form)
+
