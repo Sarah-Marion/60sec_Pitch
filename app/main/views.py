@@ -98,3 +98,31 @@ def login():
 
     return render_template('login.html', login_form = login_form)
 
+
+@main.route('/delete/<post_id>',methods=['GET','POST'])
+@login_required
+def delete(post_id):
+    
+    try:
+        post = Post.query.filter(Post.id == post_id).delete()
+        db.session.commit()
+        flash("Post deleted","warning")
+    except:
+        flash("Post not deleted","danger")
+        return redirect(url_for('main.index'))
+    return redirect(url_for('main.index'))
+
+
+
+@main.route('/deletecomment/<comment_id>',methods=['GET','POST'])
+@login_required
+def deletecomment(comment_id):
+    
+    try:
+        comment = Comment.query.filter(Comment.id == comment_id).delete()
+        db.session.commit()
+        flash("Comment deleted","info")
+    except:
+        flash("Comment not deleted","danger")
+        return redirect(url_for('main.index'))
+    return redirect(url_for('main.index'))
