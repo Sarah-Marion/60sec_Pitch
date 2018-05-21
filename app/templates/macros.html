@@ -15,11 +15,8 @@
 				<img width="100%" height="40%" src="{{url_for('static',filename=post.blog_pic_path)}}" alt="" class="img-rounded">
 			</span>
 
-
 				{% if current_user.is_authenticated %}
 				{% if current_user.has_roles('Admin') %}
-
-
 
 				<form action="{{url_for('main.edit', post_id=post.id)}}">
 					<button type="submit" class="btn btn-default btn-sm">
@@ -34,7 +31,6 @@
 						Delete
 					</button>
 				</form>
-
 
 				{% endif %}
 
