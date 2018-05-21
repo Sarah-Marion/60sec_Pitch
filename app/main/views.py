@@ -1,20 +1,19 @@
 from flask import render_template, request, redirect, url_for,flash,current_app as app, abort
-from .import main
 from ..models import User, Role, Post, Comment, Subscribe
 from .forms import LoginForm, EditPostForm, SignUpForm, SubscribeForm
 from flask_login import login_user, current_user, login_required, logout_user
 from ..import db, photos
 from ..auth import OAuthSignIn
-from flask_user import UseerManager, roles_required, roles_accepted
+from flask_user import UserManager, roles_required, roles_accepted
 from datetime import datetime
 import time
 from ..email import mail_message
 import markdown2
+from . import main
 
 
-
+# Views
 @main.route('/', methods=['GET', 'POST'])
-@main.route('/index', methods=['GET', 'POST'])
 def index():
 
     """
@@ -29,8 +28,9 @@ def index():
     	offset = datetime.fromtimestamp(now_timestamp) - datetime.utcfromtimestamp(now_timestamp)
     	return utc_datetime + offset
 
-
     user = User.query.filter_by(username=app.config['ADMIN_USERNAME']).first()
+    # user = User.query.filter_by(username=current_user).first()
+    
     page =request.args.get('page',1, type=int)
     max_page =app.config['POSTS_PER_PAGE']
     posts = Post.query.order_by(Post.time_updated.desc()).paginate(page, max_page, False)
@@ -40,6 +40,11 @@ def index():
     prev_url = url_for('main.index', page=posts.prev_num) \
         if posts.has_prev else None
     return render_template('index.html',Comment = Comment,subscribe_form=subscribe_form,date_to_local=date_to_local,user=user, posts = posts.items, next_url = next_url, prev_url = prev_url)
+
+# @main.route('/', methods=['GET', 'POST'])
+# def index():
+
+#     return render_template('index.html') 
 
 
 @main.route('/subscribe',methods=['GET','POST'])
@@ -60,14 +65,14 @@ def subscribe():
 @main.route('/signup',methods=['GET','POST'])
 def register():
 
-    form = SignupForm()
+    form = SignUpForm()
     
     if form.validate_on_submit():
         user = User(name = form.name.data, email = form.email.data, username = form.username.data,password=form.password.data)
-        user.roles.append(Role(role_name='User'))
+        user.role.append(Role(role_name='Users'))
         db.session.add(user)
         db.session.commit()
-        mail_message("Welcome to tweet some", "email/welcome_user", user.email, user = user)
+        mail_message("Welcome to Blog Some", "email/welcome_user", user.email, user = user)
 
         return redirect(url_for('main.login'))
 
