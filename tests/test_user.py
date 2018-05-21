@@ -1,6 +1,6 @@
 import unittest
 from app.models import User
-
+from os import urandom
 
 class UserModelTest(unittest.TestCase):
     """
@@ -12,7 +12,7 @@ class UserModelTest(unittest.TestCase):
         Set up method that will run before every Test
         """
 
-        self.new_user = User(username = 'Marion', password = 'potatopeel420', email = 'user@user.com')
+        self.new_user = User(username='cjjhvghxdf', password = 'potatopeel420')
 
 
     def test_password_setter(self):
@@ -25,9 +25,11 @@ class UserModelTest(unittest.TestCase):
 
 
     def test_password_verification(self):
-        self.assertTrue(self.new_user.verify_password('Marion'))
+        self.assertTrue(self.new_user.verify_password('potatopeel420'))
 
 
 
     def tearDown(self):
-        User.query.delete()
+        user = User.query.filter_by(username="cjjhvghxdf").first()
+        if user:
+            print("found")
