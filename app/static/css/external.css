@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css?family=Eater');
+body {
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.current-lines {
+    display: block;
+    float: left;
+    width: 60%;
+    min-height: 60vh;
+    max-height: 65vh;
+    overflow: auto;
+    margin-top: 1%;
+    border: 1px solid #e1eec3;
+    border-style: inset;
+    background: #C9D6FF;
+    background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF);
+    background: linear-gradient(to right, #E2E2E2, #C9D6FF);
+}
+
+.trending-lines {
+    display: block;
+    float: right;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    width: 38%;
+    min-height: 60vh;
+    max-height: 65vh;
+    overflow: auto;
+    border: 1px solid #e1eec3;
+    border-style: inset;
+    background: #ada996;
+    background: -webkit-linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);
+    background: linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);
+}
+
+.label-tag {
+    color: #cfdef3;
+    font-weight: bold;
+    display: block;
+    border: 1px solid #000;
+    margin-bottom: 5%;
+    padding: 1%;
+    width: 150px;
+    text-align: center;
+    background: #070000;
+    background: -webkit-linear-gradient(to right, #070000, #4C0001, #070000);
+    background: linear-gradient(to right, #070000, #4C0001, #070000);
+}
+
+.border-line {
+    border-left: 2px solid #ccc;
+    float: left;
+    min-width: 40vh;
+    max-height: auto;
+    line-height: 40vh;
+}
+
+.nav.nav-tabs.device-small {
+    position: sticky;
+}
+
+.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    color: initial;
+    border: 1px solid #000;
+    margin-bottom: 0;
+    width: 10%;
+    text-align: center;
+    border-radius: 20%;
+    padding: 1%;
+    color: rgb(89, 225, 255);
+    font-weight: bolder;
+    font-family: 'Russo One', sans-serif;
+    background: #536976;
+    background: -webkit-linear-gradient(to right, #292E49, #536976);
+    background: linear-gradient(to right, #292E49, #536976);
+}
+
+.button:hover,
+.button:active,
+.button:checked,
+.button:enabled,
+.button:visited {
+    color: #ffffff;
+}
+
+.logo {
+    font-family: 'Eater', cursive;
+    font-size: 180%;
+}
+
+.drop-shadow {
+    position: relative;
+    width: 90%;
+}
+
+.drop-shadow:before,
+.drop-shadow:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    bottom: 15px;
+    left: 10px;
+    width: 50%;
+    height: 20%;
+    max-width: 300px;
+    box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+    transform: rotate(-3deg);
+}
+
+.drop-shadow:after {
+    right: 10px;
+    left: auto;
+    transform: rotate(3deg);
+}
+
+@media only screen and (min-width: 768px) {
+    .device-big,
+    .tab-content>.tab-pane {
+        display: block;
+    }
+    .device-small {
+        display: none;
+    }
+    .tab-content>.tab-pane {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    #signup-form {
+        margin-left: 2%;
+        margin-right: 2%;
+        margin-top: 30%;
+        width: 95%;
+    }
+    #login-form {
+        margin-left: 2%;
+        margin-right: 2%;
+        margin-top: 40%;
+        width: 95%;
+    }
+    .main-page {
+        max-height: 40vh;
+    }
+    .trending-lines {
+        display: none;
+    }
+    .border-line {
+        display: none;
+    }
+    .current-lines {
+        text-align: justify;
+    }
+    .background {
+        min-height: 90vh;
+    }
+}
+
+@media screen and (max-width: 767px) {}
+
+@media screen and (max-width: 340px) {}
+
+@media screen and (max-width: 250px) {}
+
+app.config.navbar.navbar-default.navbar-fixed-top {
+    background: #C04848;
+    background: -webkit-linear-gradient(to right, #480048, #C04848);
+    background: linear-gradient(to right, #480048, #C04848);
+    color: #00f7ff;
+    font-weight: bolder;
+    font-size: 120%;
+}
+
+.background {
+    background: url('../images/avatar.png') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    display: block;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    min-height: 90vh;
+    left: 0;
+    position: fixed;
+    right: 0;
+    z-index: -5;
+}
+
+input {
+    color: #000000;
+    text-align: left;
+}
+
+.form-group {
+    display: block;
+}
+
+.form-control {
+    color: #000000;
+}
+
+.input-group {
+    margin-bottom: 5%;
+}
+
+.btn1 {
+    width: 100%;
+    background: #000428;
+    height: 50px;
+}
+
+#signup-form {
+    margin-top: 10%;
+    width: 45%;
+    padding: 2% 2% 2% 2%;
+    box-shadow: 0 0 4px 4px #ee9ca7;
+    border-radius: 5%;
+    color: #000000;
+    background-color: #A92E23  ;
+    background-image: linear-gradient(to top, #E1E2AE   0%, #A92E23   100%);
+    background-image: -webkit-linear-gradient(left, #E1E2AE  , #A92E23  );
+    background: -webkit-linear-gradient(#E1E2AE  , #A92E23  );
+}
+
+#login-form {
+    width: 45%;
+    margin-top: 10%;
+    padding: 2% 2% 2% 2%;
+    border-radius: 5%;
+    color: #000000;
+    box-shadow: 0 0 4px 4px #ee9ca7;
+    background-color: #A92E23 ;
+    background-image: linear-gradient(to top, #E1E2AE 0%, #A92E23 100%);
+    background-image: -webkit-linear-gradient(left, #E1E2AE, #A92E23 );
+    background: -webkit-linear-gradient(#E1E2AE, #A92E23 );
+}
+
+.navbar-brand {
+    height: 50px;
+    width: 50px;
+}
+
+.main-page {
+    display: block;
+    margin-top: 8%;
+    margin-bottom: 0;
+    min-height: 75vh;
+    width: 70%;
+}
+
+.mid {
+    max-height: 65vh;
+}

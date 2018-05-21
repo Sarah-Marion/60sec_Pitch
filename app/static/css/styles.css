@@ -1,0 +1,139 @@
+html,
+body {
+    padding-top: 70px;
+    height: 100%;
+    width: 100%;
+}
+
+.leftcolumn {
+    float: left;
+    width: 65%;
+    margin-left: 5%
+}
+
+.content-l {
+    float: left;
+    width: 60%;
+}
+
+.image-r {
+    float: right;
+    width: 38%;
+}
+
+.well.main-post {
+    border: 1px solid #cccccc;
+}
+
+.post-comments {
+    text-align: center;
+}
+
+.form-textarea {
+    border: 1px solid rgb(196, 214, 232);
+}
+
+.comment-content {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.outer {
+    float: left;
+    width: 64%;
+    overflow: auto;
+    border-style: inset;
+    position: fixed;
+}
+
+.main {
+    margin-left: 5%;
+    font-size: 28px;
+    float: left;
+    width: 60%;
+    display: inline;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 10%;
+    text-align: center;
+    border: 1px solid #AA076B;
+    background-color: #ccc;
+}
+
+.footer button {
+    margin-top: 1%;
+    background: #23074d;
+    background: -webkit-linear-gradient(to top, #cc5333, #23074d);
+    background: linear-gradient(to top, #cc5333, #23074d);
+    color: #ffffff;
+    font-weight: bold;
+    font-family: cursive;
+}
+
+.pagination {
+    position: fixed;
+    bottom: 7%;
+    font-weight: bold;
+}
+
+.modal {
+    display: none;
+}
+
+.glyphicon-trash {
+    color: rgb(252, 18, 3);
+}
+
+.glyphicon-pencil {
+    color: rgba(55, 112, 165, 0.445);
+}
+
+.message {
+    width: 50%;
+    margin-left: 20%;
+}
+
+.btn1 {
+    width: auto;
+    -webkit-background-color: #b122b6;
+    -moz-background-color: #b122b6;
+    background-color: #b122b6;
+    height: auto;
+}
+
+.label-tag {
+    color: #cfdef3;
+    font-weight: bold;
+    display: block;
+    border: 1px solid #000;
+    margin-bottom: 5%;
+    padding: 1%;
+    text-align: center;
+    background: #070000;
+    background: -webkit-linear-gradient(to right, #070000, #4C0001, #070000);
+    background: linear-gradient(to right, #070000, #4C0001, #070000);
+}
+
+@media (max-width: 480px) {
+    .sidenav {
+        display: none;
+    }
+    .main {
+        width: 100%;
+        margin-left: 0;
+        font-size: 100%;
+    }
+    .leftcolumn {
+        float: none;
+        width: 100%;
+        margin-left: 0;
+        padding-right: 4%;
+    }
+}

@@ -1,0 +1,38 @@
+body {
+    background: #403B4A;
+    background: -webkit-linear-gradient(to right, #E7E9BB, #403B4A);
+    background: linear-gradient(to right, #E7E9BB, #403B4A);
+  }
+  
+  #bb {
+    padding: 10px;
+    background: rgb(77, 41, 41);
+    display: table;
+    color: #fff;
+  }
+  
+  input[type="file"] {
+    display: none;
+  }
+  
+  h1 {
+    margin-left: 20%;
+    text-decoration: underline;
+    text-decoration-style: double;
+  }
+  
+  .profile {
+    width: 40%;
+    box-shadow: inset 0 2px 5px #388cb665;
+    float: left;
+    height: 60vh;
+    overflow: auto;
+  }
+  
+  .tweets {
+    float: right;
+    width: 50%;
+    height: 60vh;
+    box-shadow: inset 0 2px 5px #388cb665;
+    overflow: auto;
+  }
