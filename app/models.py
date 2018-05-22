@@ -16,11 +16,9 @@ class User(db.Model,UserMixin):
     password_hash = db.Column(db.String(255))
     comment_id = db.relationship('Comment', backref='user_post', lazy='dynamic')
     role = db.relationship('Role', backref='user', lazy='dynamic')
-    # role = db.relationship('Role', secondary=('roles.id'))
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String()) 
-    # reviews = db.relationship('Review', backref = 'user', lazy = "dynamic")
-    # photos = db.relationship('PhotoProfile',backref='user',lazy='dynamic')
+    
 
     @property
     def password(self):
@@ -61,8 +59,7 @@ class Role(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     role_name = db.Column(db.String(255))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    # users = db.relationship('User',backref = 'role', lazy = "dynamic")
-
+    
 class UserRoles(db.Model):
     __tablename__ = 'user_roles'   
 

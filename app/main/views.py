@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for,flash,current_app as app, abort
+from flask import render_template, request, redirect, url_for,flash,current_app as app
 from ..models import User, Role, Post, Comment, Subscribe
 from .forms import LoginForm, EditPostForm, SignUpForm, SubscribeForm
 from flask_login import login_user, current_user, login_required, logout_user
@@ -68,8 +68,8 @@ def register():
     form = SignUpForm()
     
     if form.validate_on_submit():
-        user = User(name = form.name.data, email = form.email.data, username = form.username.data,password=form.password.data)
-        user.role.append(Role(role_name='Users'))
+        user = User(name = form.name.data, email = form.email.data, username = form.username.data, password=form.password.data)
+        user.role.append(Role(role_name='User'))
         db.session.add(user)
         db.session.commit()
         mail_message("Welcome to Blog Some", "email/welcome_user", user.email, user = user)

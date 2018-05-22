@@ -52,7 +52,7 @@ def create_app(config_state):
     app.add_template_global(reversed, name='reversed')
 
 
-    # Configure UpoadSet
+    # Configure UploadSet
     configure_uploads(app,photos)
     
     

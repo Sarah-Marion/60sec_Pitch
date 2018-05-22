@@ -24,6 +24,7 @@
   <div class="sidenav text-center">
 
     <h1>SARAH MARION</h1>
+    <h3>{{user.username}}</h3>
     <hr>
     {% if user.profile_pic_path %}
       <img width="80%" src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-rounded">
